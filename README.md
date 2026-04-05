@@ -27,32 +27,33 @@
 ### Основные формулы
 
 1. **Расчёт объёма позиции:**
-```math
-\[
-usable\_capital = \min(capital, \frac{max\_position\_usdt}{leverage})
-\]
+### 1. Расчёт объёма позиции
 
-\[
-position\_notional = usable\_capital \cdot leverage
-\]
+$$
+\text{usable\_capital} = \min(\text{capital}, \frac{\text{max\_position\_usdt}}{\text{leverage}})
+$$
 
-\[
-Q = \frac{position\_notional}{Pmin}
-\]
+$$
+\text{position\_notional} = \text{usable\_capital} \cdot \text{leverage}
+$$
 
-2. **Чистая прибыль по лимитным ордерам:**
+$$
+Q = \frac{\text{position\_notional}}{P_{\min}}
+$$
 
-\[
-gross\_profit = Q \cdot (Pmax - Pmin)
-\]
+### 2. Чистая прибыль по лимитным ордерам
 
-\[
-total\_fees = position\_notional \cdot (maker\_fee \cdot 2)
-\]
+$$
+\text{gross\_profit} = Q \cdot (P_{\max} - P_{\min})
+$$
 
-\[
-net\_profit = gross\_profit - total\_fees
-\]
+$$
+\text{total\_fees} = \text{position\_notional} \cdot (maker\_fee \cdot 2)
+$$
+
+$$
+\text{net\_profit} = \text{gross\_profit} - \text{total\_fees}
+$$
 ```
 > Примечание: slippage для лимитных ордеров не применяется, так как они исполняются только по цене или лучше.
 
@@ -78,7 +79,7 @@ required\_spread = 2 \cdot maker\_fee + min\_profit
    - Binance: 1200 requests/min, но HFT требует частого обновления ордеров
 
 ---
-
+```
 ## Структура проекта
 hft-bot/
 ├─ src/
@@ -88,7 +89,7 @@ hft-bot/
 ├─ main.py
 ├─ config.py
 ├─ README.md
-
+```
 - `strategy.py` — бот для продового режима (Sandbox ccxt), лимитные ордера, фиксированное плечо.
 - `simulator.py` — оффлайн симулятор на синтетических данных с математической моделью.
 - `utils.py` — генерация синтетических тиков и расчёт объёмов и прибыли.
