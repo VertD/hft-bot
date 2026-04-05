@@ -1,0 +1,9 @@
+api_key: "YOUR_DEMO_API_KEY"
+api_secret: "YOUR_DEMO_SECRET"
+symbol: "BTC/USDT"
+leverage: 100
+capital: 1000
+min_profit: 0.0001
+duration_seconds: 60
+base_path: "results"
+mode: "offline"
