@@ -3,85 +3,74 @@
 ## Описание проекта
 
 Проект реализует **HFT бота** для торговли фьючерсами BTC/USDT.  
-Основная цель — моделировать и тестировать торговлю с ограничениями на синтетических данных и в продовом режиме через Sandbox ccxt.
-
-Бот использует **лимитные ордера (Limit/Maker)** для минимизации комиссии и исключения проскальзывания (slippage).
+Используются **лимитные ордера (Limit/Maker)** для минимизации комиссии и исключения соскальзывания (slippage).  
 
 ---
 
 ## Математическая модель
 
-### Переменные и определения
+### Основные переменные
 
 | Переменная | Описание |
 |------------|----------|
-| `capital` | Текущий капитал (USD) |
-| `leverage` | Плечо позиции |
-| `P_min` | Нижняя граница прогноза цены |
-| `P_max` | Верхняя граница прогноза цены |
-| `position_notional` | Стоимость позиции в USD |
-| `Q` | Количество базового актива (BTC) для ордера |
-| `maker_fee` | Комиссия биржи для лимитного ордера |
-| `max_position_usdt` | Лимит максимальной позиции по капиталу |
-| `net_profit` | Чистая прибыль по ордеру |
+| capital | Текущий капитал (USD) |
+| leverage | Плечо позиции |
+| P_min | Нижняя граница прогноза цены |
+| P_max | Верхняя граница прогноза цены |
+| position_notional | Стоимость позиции в USD |
+| Q | Количество базового актива (BTC) для ордера |
+| maker_fee | Комиссия биржи для лимитного ордера |
+| max_position_usdt | Лимит максимальной позиции по капиталу |
+| net_profit | Чистая прибыль по ордеру |
 
-### Основные формулы
-
-#### 1. Расчёт объёма позиции
+### Расчёт объёма позиции
 
 $$
-usable\_capital = \min(capital, \frac{max\_position\_usdt}{leverage})
+\text{usable\_capital} = \min(\text{capital}, \frac{\text{max\_position\_usdt}}{\text{leverage}})
 $$
 
 $$
-position\_notional = usable\_capital \cdot leverage
+\text{position\_notional} = \text{usable\_capital} \cdot \text{leverage}
 $$
 
 $$
-Q = \frac{position\_notional}{P\_min}
+Q = \frac{\text{position\_notional}}{P_{\min}}
 $$
 
-#### 2. Чистая прибыль по лимитным ордерам
+### Чистая прибыль по лимитным ордерам
 
 $$
-gross\_profit = Q \cdot (P\_max - P\_min)
-$$
-
-$$
-total\_fees = position\_notional \cdot (maker\_fee \cdot 2)
+\text{gross\_profit} = Q \cdot (P_{\max} - P_{\min})
 $$
 
 $$
-net\_profit = gross\_profit - total\_fees
+\text{total\_fees} = \text{position\_notional} \cdot (2 \cdot \text{maker\_fee})
 $$
 
-> Примечание: slippage для лимитных ордеров не применяется, так как они исполняются только по цене или лучше.
-
-#### 3. Минимальный рентабельный спред
-
 $$
-required\_spread = 2 \cdot maker\_fee + min\_profit
+\text{net\_profit} = \text{gross\_profit} - \text{total\_fees}
 $$
 
-Ордер считается выгодным только если прогнозный спред выше `required_spread`.
+> Примечание: slippage для лимитных ордеров не применяется.
+
+### Минимальный рентабельный спред
+
+$$
+required\_spread = 2 \cdot \text{maker\_fee} + min\_profit
+$$
 
 ---
 
 ## Ограничения и риски
 
-1. **Execution latency**
-   - Время между сигналом и исполнением 5–50ms
-
-2. **Position limits**
-   - Биржа ограничивает плечо и максимальную позицию
-
-3. **Rate limits API**
-   - Binance: 1200 requests/min
-   - Для HFT частота обновления ордеров требует оптимизации (batch modify, co-location)
+1. **Execution latency** — задержка между сигналом и исполнением 5–50 ms  
+2. **Position limits** — биржа ограничивает плечо и максимальную позицию  
+3. **Rate limits API** — Binance: 1200 requests/min, HFT требует частого обновления ордеров
 
 ---
 
 ## Структура проекта
+
 
 hft-bot/
 ├─ src/
