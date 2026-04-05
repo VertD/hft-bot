@@ -27,7 +27,6 @@
 | $f_m$ | Комиссия биржи для Maker-ордеров |
 | $C_{max}$ | Лимит максимальной позиции (ограничение ликвидности) |
 
-### 1. Расчёт объёма позиции
 
 ### 1. Расчёт объёма позиции
 
@@ -35,35 +34,27 @@
 \text{usable\_capital} = \min\left(\text{capital}, \frac{C_{\max}}{\text{leverage}}\right)
 ```
 
-$$
+```math
 V_{\text{notional}} = \text{usable\_capital} \cdot \text{leverage}
-$$
+```
 
-$$
+```math
 Q = \frac{V_{\text{notional}}}{P_{\min}}
-$$
+```
 
 ### 2. Чистая прибыль по лимитным ордерам
 
-$$
+```math
 \text{gross\_profit} = Q \cdot (P_{\max} - P_{\min})
-$$
+```
 
-$$
+```math
 \text{total\_fees} = V_{\text{notional}} \cdot (2 \cdot f_{m})
-$$
+```
 
-$$
+```math
 \text{net\_profit} = \text{gross\_profit} - \text{total\_fees}
-$$
-
-### 3. Минимальный рентабельный спред
-
-Бот входит в сделку только при условии, что потенциальная прибыль перекрывает комиссии и заданный порог:
-
-$$
-\frac{P_{\max} - P_{\min}}{P_{\min}} \ge (2 \cdot f_m) + \text{min\_profit}
-$$
+```
 
 > **Note:** Проскальзывание (slippage) в данной модели равно 0.
 
@@ -71,9 +62,9 @@ $$
 
 Бот входит в сделку только при условии:
 
-$$
+```math
 \frac{P_{max} - P_{min}}{P_{min}} \ge (2 \cdot f_m) + \text{min\_profit}
-$$
+```
 
 ---
 
