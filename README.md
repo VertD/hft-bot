@@ -29,34 +29,40 @@
 
 ### 1. Расчёт объёма позиции
 
-Для управления рисками и учёта ликвидности стакана объем рассчитывается следующим образом:
+### 1. Расчёт объёма позиции
 
 $$
-\text{usable\_capital} = \min\left(\text{capital}, \frac{C_{max}}{\text{leverage}}\right)
-$$
-
-$$
-V_{notional} = \text{usable\_capital} \cdot \text{leverage}
+\text{usable\_capital} = \min\left(\text{capital}, \frac{C_{\max}}{\text{leverage}}\right)
 $$
 
 $$
-Q = \frac{V_{notional}}{P_{min}}
+V_{\text{notional}} = \text{usable\_capital} \cdot \text{leverage}
+$$
+
+$$
+Q = \frac{V_{\text{notional}}}{P_{\min}}
 $$
 
 ### 2. Чистая прибыль по лимитным ордерам
 
-Поскольку мы используем лимитные ордера, цена исполнения всегда равна прогнозной.
-
 $$
-\text{gross\_profit} = Q \cdot (P_{max} - P_{min})
+\text{gross\_profit} = Q \cdot (P_{\max} - P_{\min})
 $$
 
 $$
-\text{total\_fees} = V_{notional} \cdot (2 \cdot f_m)
+\text{total\_fees} = V_{\text{notional}} \cdot (2 \cdot f_m)
 $$
 
 $$
 \text{net\_profit} = \text{gross\_profit} - \text{total\_fees}
+$$
+
+### 3. Минимальный рентабельный спред
+
+Бот входит в сделку только при условии, что потенциальная прибыль перекрывает комиссии и заданный порог:
+
+$$
+\frac{P_{\max} - P_{\min}}{P_{\min}} \ge (2 \cdot f_m) + \text{min\_profit}
 $$
 
 > **Note:** Проскальзывание (slippage) в данной модели равно 0.
