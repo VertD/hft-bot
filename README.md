@@ -27,7 +27,7 @@
 ### Основные формулы
 
 1. **Расчёт объёма позиции:**
-
+```math
 \[
 usable\_capital = \min(capital, \frac{max\_position\_usdt}{leverage})
 \]
@@ -53,7 +53,7 @@ total\_fees = position\_notional \cdot (maker\_fee \cdot 2)
 \[
 net\_profit = gross\_profit - total\_fees
 \]
-
+```
 > Примечание: slippage для лимитных ордеров не применяется, так как они исполняются только по цене или лучше.
 
 3. **Минимальный рентабельный спред:**
