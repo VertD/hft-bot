@@ -32,11 +32,11 @@
 Для управления рисками и учёта ликвидности стакана объем рассчитывается следующим образом:
 
 $$
-\text{usable_capital} = \min\left(\text{capital}, \frac{C_{max}}{\text{leverage}}\right)
+\text{usable\_capital} = \min\left(\text{capital}, \frac{C_{max}}{\text{leverage}}\right)
 $$
 
 $$
-V_{notional} = \text{usable_capital} \cdot \text{leverage}
+V_{notional} = \text{usable\_capital} \cdot \text{leverage}
 $$
 
 $$
@@ -48,15 +48,15 @@ $$
 Поскольку мы используем лимитные ордера, цена исполнения всегда равна прогнозной.
 
 $$
-\text{gross_profit} = Q \cdot (P_{max} - P_{min})
+\text{gross\_profit} = Q \cdot (P_{max} - P_{min})
 $$
 
 $$
-\text{total_fees} = V_{notional} \cdot (2 \cdot f_m)
+\text{total\_fees} = V_{notional} \cdot (2 \cdot f_m)
 $$
 
 $$
-\text{net_profit} = \text{gross_profit} - \text{total_fees}
+\text{net\_profit} = \text{gross\_profit} - \text{total\_fees}
 $$
 
 > **Note:** Проскальзывание (slippage) в данной модели равно 0.
