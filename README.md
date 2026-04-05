@@ -31,9 +31,9 @@
 
 ### 1. Расчёт объёма позиции
 
-$$
+```math
 \text{usable\_capital} = \min\left(\text{capital}, \frac{C_{\max}}{\text{leverage}}\right)
-$$
+```
 
 $$
 V_{\text{notional}} = \text{usable\_capital} \cdot \text{leverage}
