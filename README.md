@@ -50,7 +50,7 @@ $$
 $$
 
 $$
-\text{total\_fees} = V_{\text{notional}} \cdot (2 \cdot f_m)
+\text{total\_fees} = V_{\text{notional}} \cdot (2 \cdot f_{m})
 $$
 
 $$
